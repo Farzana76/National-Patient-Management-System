@@ -1,0 +1,25 @@
+create or replace procedure dd
+is
+
+cursor t is
+select dr_name,designation from doctors inner join surgical_history
+on doctors.dr_id=surgical_history.dr_id where surgical_history.s_his_id= 
+(select patient.s_his_id from patient where pt_name='Sourabh Rahman');
+
+thedname doctors.dr_name%Type;
+thed doctors.designation%Type;
+
+
+begin
+
+    open t;
+		
+		loop
+			fetch t into thedname,thed;
+			exit when t%notfound;
+			dbms_output.put_line(thedname||'  '||thed); 
+		end loop;
+	close t;
+
+end;
+/

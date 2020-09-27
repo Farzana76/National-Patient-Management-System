@@ -1,0 +1,15 @@
+create or replace procedure blood_group_find
+is
+
+begin
+
+    for t in (select * from patient@server where bl_grp = 'B+' )		
+	loop
+		dbms_output.put_line('Show the name and phone number of the patient whose blood group is B+: '||t.pt_name||' '||t.pt_phn);
+	end loop;
+	commit;
+	
+end;
+/
+
+execute blood_group_find;

@@ -1,0 +1,59 @@
+CREATE TABLE patient_male
+(
+	pt_id varchar(5) NOT NULL,
+	pt_name varchar(20) DEFAULT NULL,
+	pt_age varchar(3) DEFAULT NULL,
+	pt_sex varchar(1) DEFAULT NULL,
+	pt_phn varchar(11) DEFAULT NULL,
+	pt_house varchar(5) DEFAULT NULL,
+	pt_road varchar(5) DEFAULT NULL,
+	pt_block varchar(5) DEFAULT NULL,
+	pt_section varchar(30) DEFAULT NULL,
+	pt_district varchar(10) DEFAULT NULL,
+	bl_grp varchar(3) DEFAULT NULL,
+	weight varchar(10) DEFAULT NULL,
+	height varchar(10) DEFAULT NULL,
+	dia_id varchar(5) NOT NULL,
+	his_id varchar(5) NOT NULL,
+	s_his_id varchar(5),
+	PRIMARY KEY (pt_id),
+);
+
+CREATE TABLE patient_female
+(
+	pt_id varchar(5) NOT NULL,
+	pt_name varchar(20) DEFAULT NULL,
+	pt_age varchar(3) DEFAULT NULL,
+	pt_sex varchar(1) DEFAULT NULL,
+	pt_phn varchar(11) DEFAULT NULL,
+	pt_house varchar(5) DEFAULT NULL,
+	pt_road varchar(5) DEFAULT NULL,
+	pt_block varchar(5) DEFAULT NULL,
+	pt_section varchar(30) DEFAULT NULL,
+	pt_district varchar(10) DEFAULT NULL,
+	bl_grp varchar(3) DEFAULT NULL,
+	weight varchar(10) DEFAULT NULL,
+	height varchar(10) DEFAULT NULL,
+	dia_id varchar(5) NOT NULL,
+	his_id varchar(5) NOT NULL,
+	s_his_id varchar(5),
+	PRIMARY KEY (pt_id),
+);
+
+
+
+create view patient_view as select * from patient_male UNION select * from patient_female;
+
+create or replace trigger patient_trigg
+after insert on patient 
+for each row
+begin
+if (:new.pt_sex='M') then
+insert into patient_male values(:new.pt_id,:new.pt_name,:new.pt_age,:new.pt_sex,:new.pt_phn,:new.pt_house,:new.pt_road,:new.pt_block,:new.pt_section,:new.pt_district,:new.bl_grp,:new.weight,:new.height,:new.dia_id,:new.his_id,:new.s_his_id);
+
+else
+insert into patient_female values(:new.pt_id,:new.pt_name,:new.pt_age,:new.pt_sex,:new.pt_phn,:new.pt_house,:new.pt_road,:new.pt_block,:new.pt_section,:new.pt_district,:new.bl_grp,:new.weight,:new.height,:new.dia_id,:new.his_id,:new.s_his_id);
+end if;
+
+end;
+/

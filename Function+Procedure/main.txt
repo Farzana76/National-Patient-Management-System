@@ -1,0 +1,43 @@
+set serveroutput on;
+declare
+a varchar2(100);
+b varchar2(100);
+c varchar2(100);
+
+begin
+   dbms_output.put_line('Total patient of same blood group of given patient ID: ');
+   a:=blood_group(1001);
+   dbms_output.put_line(a);
+   dbms_output.put_line('
+   ');
+   dbms_output.put_line('Patient ID, number of same blood group and the blood group: ');
+   same_bl_group;
+   dbms_output.put_line('
+   ');
+   dbms_output.put_line('ID of the doctor who have not done any surgery: ');
+   b:=dr();
+   dbms_output.put_line(b);
+   dbms_output.put_line('
+   ');
+   dbms_output.put_line('Count of patients who have normal report: ');
+   c:=rep();
+   dbms_output.put_line(c);
+   dbms_output.put_line('
+   ');
+   dbms_output.put_line('Patient IDs and names whose reports were made on 21-05-2016: ');
+   rep_date;
+   dbms_output.put_line('
+   ');
+   dbms_output.put_line('Shows the history date and problem of a patient named "Prottasa Karim": ');
+   his;
+   dbms_output.put_line('
+   ');
+   dbms_output.put_line('Shows the name and phone number of a patient whose surgical cost was greater than 60 thousands: ');
+   shis;
+   dbms_output.put_line('
+   ');
+   dbms_output.put_line('Shows the name and designation of the doctor who has done operation on "Sourabh Rahman": ');
+   dd;
+
+end;
+/

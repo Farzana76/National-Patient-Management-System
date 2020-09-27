@@ -1,0 +1,15 @@
+create or replace procedure fragment_doctor2
+is
+
+begin
+
+    for t in (select * from doctors where dr_hospital_chamber = 'Medinova' )		
+	loop
+		insert into doctors@site2 values (t.dr_id, t.dr_name, t.dr_age, t.dr_sex, t.dr_phn, t.dr_email, t.dr_hospital_chamber, t.designation, t.degree, t.department, t.experience, t.time, t.fee, t.day);
+	end loop;
+	commit;
+	
+end;
+/
+
+execute fragment_doctor2;

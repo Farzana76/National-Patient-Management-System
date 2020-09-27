@@ -1,0 +1,25 @@
+create or replace procedure rep_date
+is
+
+cursor t is
+select patient.pt_id,pt_name from patient inner join diagnosis 
+on patient.dia_id=diagnosis.dia_id inner join reports 
+on reports.rep_id=diagnosis.rep_id where rep_date = '21-05-2016';
+
+thepnum patient.pt_id%Type;
+thenum patient.pt_name%Type;
+
+
+begin
+
+    open t;
+		
+		loop
+			fetch t into thepnum,thenum;
+			exit when t%notfound;
+			dbms_output.put_line(thepnum||' '||thenum); 
+		end loop;
+	close t;
+
+end;
+/

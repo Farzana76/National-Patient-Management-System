@@ -1,0 +1,4 @@
+drop database link server;
+create database link server connect to sys identified by "sys" using '(DESCRIPTION = 
+(ADDRESS = (PROTOCOL = TCP)(HOST = 192.168.0.107)(PORT = 1521))(CONNECT_DATA =(SERVER = 
+DEDICATED)(SERVICE_NAME = XE)))';

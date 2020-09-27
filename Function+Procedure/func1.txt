@@ -1,0 +1,14 @@
+create or replace function blood_group
+	(id varchar2)
+	return varchar2
+	is
+pnum number;
+
+begin
+ select count(pt_id) into pnum 
+ from patient where bl_grp =
+ (select bl_grp from patient where pt_id=id);
+
+return pnum;
+end;
+/

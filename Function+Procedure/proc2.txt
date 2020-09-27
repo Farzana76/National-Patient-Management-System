@@ -1,0 +1,23 @@
+create or replace procedure same_bl_group
+is
+
+cursor t is
+select pt_id,blood_group(pt_id),bl_grp from patient;
+
+thepnum patient.pt_id%Type;
+theblgrpf patient.pt_id%Type;
+theblgrp patient.bl_grp%Type;
+
+begin
+
+    open t;
+		
+		loop
+			fetch t into thepnum,theblgrpf,theblgrp;
+			exit when t%notfound;
+			dbms_output.put_line(thepnum||' '||theblgrpf||' '||theblgrp); 
+		end loop;
+	close t;
+
+end;
+/

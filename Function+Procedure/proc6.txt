@@ -1,0 +1,25 @@
+create or replace procedure his
+is
+
+cursor t is
+select his_date,problem from history inner join patient
+on history.his_id = patient.his_id
+where patient.pt_name = 'Prottasa Karim';
+
+thedate history.his_date%Type;
+theproblem history.problem%Type;
+
+
+begin
+
+    open t;
+		
+		loop
+			fetch t into thedate,theproblem;
+			exit when t%notfound;
+			dbms_output.put_line(thedate||'    '||theproblem); 
+		end loop;
+	close t;
+
+end;
+/

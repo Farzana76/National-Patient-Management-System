@@ -1,0 +1,24 @@
+DROP TABLE patient_old_phn CASCADE CONSTRAINTS;
+
+CREATE TABLE patient_old_phn
+(
+	pt_id varchar(5) NOT NULL,
+	pt_phn varchar(11) DEFAULT NULL
+);
+
+create or replace trigger update_patient_phn
+after update of pt_phn on patient
+for each row
+begin
+	insert into patient_old_phn values(:old.pt_id,:old.pt_phn);
+
+end;
+/
+
+update patient 
+set pt_phn = '01521111806'
+where pt_id= '1002';
+
+commit;
+
+

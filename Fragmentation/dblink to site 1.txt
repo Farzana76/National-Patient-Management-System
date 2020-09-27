@@ -1,0 +1,4 @@
+drop database link site1;
+create database link site1 connect to hospital identified by "hospital1" using '(DESCRIPTION = 
+(ADDRESS = (PROTOCOL = TCP)(HOST = 192.168.0.109)(PORT = 1521))(CONNECT_DATA =(SERVER = 
+DEDICATED)(SERVICE_NAME = XE)))';

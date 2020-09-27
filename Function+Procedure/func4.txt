@@ -1,0 +1,13 @@
+create or replace function rep
+	return varchar2
+	is
+rnum number;
+
+begin
+  select count(pt_id) into rnum from patient inner join diagnosis 
+  on patient.dia_id=diagnosis.dia_id inner join reports 
+  on reports.rep_id=diagnosis.rep_id where impression = 'Normal report';
+
+return rnum;
+end;
+/

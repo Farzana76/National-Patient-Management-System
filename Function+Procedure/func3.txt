@@ -1,0 +1,15 @@
+create or replace function dr
+	return varchar2
+	is
+	
+thedr number;
+
+
+begin
+    select doctors.dr_id into thedr from 
+	doctors where doctors.dr_id not in 
+	(select surgical_history.dr_id from surgical_history);
+
+ return thedr;
+end;
+/

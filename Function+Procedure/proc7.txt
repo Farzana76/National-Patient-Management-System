@@ -1,0 +1,24 @@
+create or replace procedure shis
+is
+
+cursor t is
+select patient.pt_name,patient.pt_phn from patient inner join surgical_history on 
+patient.s_his_id = surgical_history.s_his_id where s_cost > '60,000';
+
+thename patient.pt_name%Type;
+thephn patient.pt_phn%Type;
+
+
+begin
+
+    open t;
+		
+		loop
+			fetch t into thename,thephn;
+			exit when t%notfound;
+			dbms_output.put_line(thename||'  '||thephn); 
+		end loop;
+	close t;
+
+end;
+/
